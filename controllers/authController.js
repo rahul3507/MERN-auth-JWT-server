@@ -114,7 +114,9 @@ export const sendVerifyOtp = async (req, res) => {
         message: "Account is Already verified",
       });
     }
-    String(Math.floor(100000 + Math.random() * 900000);)
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    use.verifyOtp = otp;
+    user.verfyOtp;
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
