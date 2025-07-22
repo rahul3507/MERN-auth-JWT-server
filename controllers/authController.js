@@ -2,6 +2,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
+import transporter from "../config/nodemailer.js";
 
 //register
 export const register = async (req, res) => {
@@ -33,6 +34,17 @@ export const register = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
+    //sending email
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: "Welcome to GreatStack",
+      text: `Welcome to Greatstack website. Your account has been created with email id: ${email}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
     return res.json({ success: true });
   } catch (error) {
     res.json({ success: false, message: error.message });
