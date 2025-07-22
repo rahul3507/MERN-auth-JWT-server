@@ -102,3 +102,20 @@ export const logout = async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 };
+
+//verifyOtp
+export const sendVerifyOtp = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await userModel.findById();
+    if (user.isAccountVerified) {
+      return res.json({
+        success: false,
+        message: "Account is Already verified",
+      });
+    }
+    String(Math.floor(100000 + Math.random() * 900000);)
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
