@@ -6,6 +6,7 @@ import {
   logout,
   register,
   sendVerifyOtp,
+  verifyEmail,
 } from "../controllers/authController.js";
 import userAuth from "../middleware/userAuth.js";
 
@@ -15,6 +16,7 @@ authRouter.post("/register", register);
 authRouter.post("/login", login);
 authRouter.post("/logout", logout);
 authRouter.post("/send-verify-otp", userAuth, sendVerifyOtp);
-authRouter.post("/verify-account", userAuth);
+authRouter.post("/verify-account", userAuth, verifyEmail);
+authRouter.post("/os-auth", userAuth);
 
 export default authRouter;
